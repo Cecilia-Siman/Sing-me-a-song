@@ -22,6 +22,7 @@ describe("Tests on GET recommendtions", () => {
   it.todo("Must return list with 10 recommendations");
   it.todo('Must return no recomenddations for downvoted recommendation');
   it.todo("Must return recommendation by id");
+  it.todo("Must return 404 for no recommendation by id");
   it.todo("Must return random recommendation");
   it.todo("Must return 404 for no songs registered");
   it.todo("Must return a specific amount of recommendations");
