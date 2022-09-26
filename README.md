@@ -36,13 +36,13 @@ Depois, dentro das pastas de front-end e back-end, rode o seguinte comando para 
 npm install
 ```
 
-Finalizado o processo, é só inicializar o servidor, no back
+Finalizado o processo, é só inicializar o servidor, no back-end
 
 ```
 npm run dev
 ```
 
-No front 
+No front-end
 
 ```
 npm start
@@ -67,7 +67,7 @@ Para executar ambos os testes e testar a cobertura
 npm run coverage
 ```
 
-Os testes e2e são executados por meio da biblioteca cypress, no front:
+Os testes e2e são executados por meio da biblioteca cypress, no front-end
 
 ```
 npx cypress open
