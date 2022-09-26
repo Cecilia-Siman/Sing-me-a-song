@@ -1,7 +1,7 @@
 import { jest } from "@jest/globals";
 import { recommendationService } from "../../src/services/recommendationsService";
 import { recommendationRepository } from "../../src/repositories/recommendationRepository";
-import { number } from "joi";
+import { recommendationExample } from "./factories/recommendationFactory";
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -10,9 +10,10 @@ beforeEach(() => {
 
 describe("Test insert recommendation", () => {
   it("Test create recommendation", async () => {
+    const { name, youtubeLink } = recommendationExample();
     const recommendation = {
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
+      name,
+      youtubeLink,
     };
 
     jest
@@ -28,9 +29,10 @@ describe("Test insert recommendation", () => {
     expect(recommendationRepository.create).toBeCalled();
   });
   it("Test insert recommendation with repeated name", async () => {
+    const { name, youtubeLink } = recommendationExample();
     const recommendation = {
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
+      name,
+      youtubeLink,
     };
     jest
       .spyOn(recommendationRepository, "findByName")
@@ -52,12 +54,7 @@ describe("Test insert recommendation", () => {
 
 describe("Test voting", () => {
   it("Upvote", async () => {
-    const recommendation = {
-      id: 1,
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
-      score: 0,
-    };
+    const recommendation = recommendationExample();
     jest
       .spyOn(recommendationRepository, "find")
       .mockImplementationOnce((): any => {
@@ -84,12 +81,7 @@ describe("Test voting", () => {
     expect(promise).rejects.toEqual({ type: "not_found", message: "" });
   });
   it("Downvote once", async () => {
-    const recommendation = {
-      id: 1,
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
-      score: 0,
-    };
+    const recommendation = recommendationExample();
     jest
       .spyOn(recommendationRepository, "find")
       .mockImplementationOnce((): any => {
@@ -125,12 +117,7 @@ describe("Test voting", () => {
     expect(recommendationRepository.updateScore).not.toBeCalled();
   });
   it("Test downvoting and removing recommendation", async () => {
-    const recommendation = {
-      id: 1,
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
-      score: 0,
-    };
+    const recommendation = recommendationExample();
     jest
       .spyOn(recommendationRepository, "find")
       .mockImplementationOnce((): any => {
@@ -164,12 +151,7 @@ describe("Test getting recommendations", () => {
     expect(recommendationRepository.findAll).toBeCalled();
   });
   it("Get recommendation by id", async () => {
-    const recommendation = {
-      id: 1,
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
-      score: 0,
-    };
+    const recommendation = recommendationExample();
     jest
       .spyOn(recommendationRepository, "find")
       .mockImplementationOnce((): any => {
@@ -201,12 +183,7 @@ describe("Test getting recommendations", () => {
     expect(recommendationRepository.getAmountByScore).toBeCalled();
   });
   it("Get random recommendation", async () => {
-    const recommendation = {
-      id: 1,
-      name: "Don't worry :)",
-      youtubeLink: "https://www.youtube.com/watch?v=mNEUkkoUoIA",
-      score: 10,
-    };
+    const recommendation = recommendationExample();
     jest
       .spyOn(recommendationRepository, "findAll")
       .mockImplementationOnce((): any => {
